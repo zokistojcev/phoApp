@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:vm="clr-namespace:App26.ViewModels"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:local="clr-namespace:App26"
+             x:Class="App26.Views.PhotosPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+    <Shell.TitleView>
+        <Label Padding="0,12,0,0" TextColor="White" FontSize="17" Text="Photo List" LineBreakMode="TailTruncation"/>
+    </Shell.TitleView>
+    <ContentPage.BindingContext>
+        <vm:PhotosViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <local:ImageConverter x:Key="ImageConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        
+        <StackLayout>
+            <CollectionView 
+                ItemsSource="{Binding AllPhotos}"
+                Margin="0,10,0,0">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="3"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout VerticalOptions="Center">
+                            <Frame 
+                                    InputTransparent="False" 
+                                    HasShadow="False" 
+                                    Padding="10,0,10,0" 
+                                    HorizontalOptions="FillAndExpand" 
+                                    VerticalOptions="CenterAndExpand" 
+                                    CornerRadius="0">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid RowSpacing="0"  ColumnSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="150"/>
+                                        <RowDefinition Height="50"/>
+                                    </Grid.RowDefinitions>
+                                    <ffimageloading:CachedImage 
+                                        IsVisible="{Binding imageIsVisible}"
+                                        Grid.Row="0" 
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="Center"
+                                        WidthRequest="150"
+                                        HeightRequest="150"
+                                        DownsampleToViewSize="true"
+                                        Source="{Binding ImageCached.Source}">
+                                    </ffimageloading:CachedImage>
+                                    <ffimageloading:CachedImage 
+                                        IsVisible="{Binding thumbnailIsVisible}"
+                                        Grid.Row="0" 
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="Center"
+                                        WidthRequest="150"
+                                        HeightRequest="150"
+                                        DownsampleToViewSize="true"
+                                        Source="{Binding thumbnailUrl}">
+                                    </ffimageloading:CachedImage>
+                            <!--<Image Source="{Binding thumbnailUrl}" AbsoluteLayout.LayoutBounds="0,0,1,1"   AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill"/>-->
+                                    <Label Grid.Row="1"  LineBreakMode="TailTruncation" VerticalOptions="Center" Text="{Binding title}" HorizontalOptions="End" />
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

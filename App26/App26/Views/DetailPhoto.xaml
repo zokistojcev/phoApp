@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App26.Views.DetailPhoto"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:vm="clr-namespace:App26.ViewModels">
+    <Shell.TitleView>
+        <Label Padding="0,12,0,0" TextColor="White" FontSize="17" Text="{Binding Title}" LineBreakMode="TailTruncation"/>
+    </Shell.TitleView>
+    <ContentPage.BindingContext>
+        <vm:PhotoDetailViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.9*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" HorizontalOptions="FillAndExpand">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Text="Delete" Clicked="Button_Clicked" BackgroundColor="Blue" TextColor="White" CommandParameter="{Binding Id}"/>
+                        <Button Grid.Column="1" Text="Add Photo" BackgroundColor="Blue" TextColor="White" Clicked="btnSelectPic_Clicked"/>
+                    </Grid>
+
+                </Grid>
+                <Frame Grid.Row="1" IsVisible="{Binding ThumbnailIsVisible}">
+                    <ffimageloading:CachedImage 
+                        x:Name="detailImage"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="FillAndExpand"
+                                            DownsampleToViewSize="true"
+                                            Source="{Binding Url}">
+                    </ffimageloading:CachedImage>
+                </Frame>
+                <Frame Grid.Row="1" IsVisible="{Binding ImageIsVisible}">
+                    <ffimageloading:CachedImage 
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="FillAndExpand"
+                                            DownsampleToViewSize="true"
+                                            Source="{Binding ImageCached.Source}">
+                    </ffimageloading:CachedImage>
+                </Frame>
+            </Grid>
+            <!--<Label Text="{Binding Id}"/>-->
+            <Grid IsVisible="{Binding DefaultMode}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="detailTitle" Text="{Binding TitlePhoto}" IsVisible="{Binding DefaultMode}"/>
+                <Button Grid.Column="1" FontSize="8" Text="Edit Text" Clicked="Button_Clicked_1"></Button>
+            </Grid>
+            <Grid IsVisible="{Binding EditMode}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" x:Name="entryEdit"  Text="{Binding EntryEditText, Mode=TwoWay}"/>
+                <Button Grid.Column="1" Text="Save" Clicked="Button_Clicked_3"></Button>
+            </Grid>
+        </StackLayout>
+          
+           
+    
+    
+    </ContentPage.Content>
+</ContentPage>
