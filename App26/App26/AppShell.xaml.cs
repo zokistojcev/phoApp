@@ -15,6 +15,7 @@ namespace App26
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(DetailPhoto), typeof(DetailPhoto));
             Routing.RegisterRoute(nameof(PhotosPage), typeof(PhotosPage));
+            Routing.RegisterRoute(nameof(MatchDetailsPage), typeof(PhotosPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

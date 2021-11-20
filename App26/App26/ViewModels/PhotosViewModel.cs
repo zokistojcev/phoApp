@@ -1,6 +1,7 @@
 ﻿using App26.Models;
 using App26.Services;
 using App26.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -32,6 +33,11 @@ namespace App26.ViewModels
             AllPhotos = new ObservableCollection<Photo>();
             AddItemCommand = new Command(OnAddItem);
             //Task.Run(async () => await DataStorePhotos.GetItemsAsync());
+        }
+
+        internal async void ExecuteNaviteToMatchDetails()
+        {
+             await Shell.Current.GoToAsync(nameof(MatchDetailsPage));
         }
 
         public async Task GetAllPhotos()

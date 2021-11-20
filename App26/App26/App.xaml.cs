@@ -17,6 +17,7 @@ namespace App26
 
             DependencyService.Register<MockDataStore>();
             DependencyService.Register<PhotosListDataStore>();
+            DependencyService.Register<ParDetailsDataStore>();
             MainPage = new AppShell();
         }
 

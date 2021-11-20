@@ -22,4 +22,9 @@ namespace App26.Services
 
 
     }
+    public interface IDataMatchDetails<ParDetails>
+    {
+        Task<ParDetails> GetItemAsync();
+    }
+
 }

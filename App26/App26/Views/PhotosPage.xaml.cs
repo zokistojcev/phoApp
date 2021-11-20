@@ -24,5 +24,10 @@ namespace App26.Views
             photo = tapGesture.CommandParameter as Photo;
             await Navigation.PushAsync(new DetailPhoto(photo));
         }
+
+        private async void Button_Clicked(object sender, System.EventArgs e)
+        {
+             await Navigation.PushAsync(new MatchDetailsPage());
+        }
     }
 }

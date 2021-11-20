@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:App26.ViewModels"
+             x:Class="App26.Views.MatchDetailsPage">
+    <ContentPage.BindingContext>
+        <vm:MatchDetailsViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding Host}"></Label>
+            <Label Text="{Binding Visitor}"></Label>
+      
+                <ScrollView >
+                <StackLayout BindableLayout.ItemsSource="{Binding TipGroups}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid
+                                    Margin="5"
+                                    Padding="10"
+                                    BackgroundColor="White"
+                                    ColumnSpacing="10"
+                                    HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding IN}"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+          
+                </ScrollView>
+         
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

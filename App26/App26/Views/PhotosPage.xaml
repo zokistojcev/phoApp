@@ -20,6 +20,7 @@
     <ContentPage.Content>
         
         <StackLayout>
+            <Button Text="Match Details" Clicked="Button_Clicked"></Button>
             <CollectionView 
                 ItemsSource="{Binding AllPhotos}"
                 Margin="0,10,0,0">
